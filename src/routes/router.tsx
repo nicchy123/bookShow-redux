@@ -4,6 +4,7 @@ import MainLayout from "../Layout/MainLayout";
 import Books from "../pages/Books";
 import Cart from "../pages/Cart";
 import Create from "../pages/Create";
+import BookDetails from "../pages/BookDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +29,11 @@ export const router = createBrowserRouter([
       
         path: "/create",
         element: <Create />,
+      },
+      {
+      
+        path: "/book/:id",
+        element: <BookDetails />,
       },
     ],
   },
