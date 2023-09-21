@@ -3,7 +3,7 @@ import { useGetAllBooksQuery } from "../redux/api/apiSlice";
 import { useAppDispatch } from "../redux/hooks/hooks";
 import { addtoCart } from "../redux/feature/cart/cartSlice";
 import booksInterface from "../interfacec/bookInterface";
-import toast from "react-hot-toast";
+
 
 const Book = () => {
     const { data } = useGetAllBooksQuery(undefined);
