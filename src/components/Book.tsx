@@ -31,7 +31,7 @@ const Book = () => {
               </button>
               <button onClick={()=>
                 dispath(addtoCart(book),
-                toast.success(`${book.Title} added to cart`)
+              
               
                 )} className="btn btn-primary btn-sm">Add to cart</button>
             </div>
