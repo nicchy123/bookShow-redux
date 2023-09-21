@@ -20,7 +20,7 @@ const Navbar = () => {
              
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">BooksHub</a>
+          <a className="btn btn-ghost normal-case text-xl">Book Store</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="flex justify-center items-center gap-10 px-1">

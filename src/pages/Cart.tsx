@@ -1,5 +1,5 @@
 import booksInterface from "../interfacec/bookInterface";
-import { addtoCart, removeFromCart } from "../redux/feature/cart/cartSlice";
+import { addtoCart, removeFromCart, removeOneFromCart } from "../redux/feature/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
 import { FaPlus, FaMinus,  } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -31,7 +31,7 @@ const Cart = () => {
                                     <button  onClick={()=>dispatch(addtoCart(item))}  className="text-3xl">
                                         <FaPlus className="w-6 h-6"/>
                                     </button>
-                                    <button className="text-3xl">
+                                    <button onClick={()=>dispatch(removeOneFromCart(item))} className="text-3xl">
                                         <FaMinus className="w-6 h-6"/>
                                     </button>
                                     <button onClick={()=>dispatch(removeFromCart(item))}>

@@ -1,38 +1,54 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import booksInterface from '../../../interfacec/bookInterface';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import IBooksInterface from "../../../interfacec/bookInterface";
 
 export interface ICart {
-  product: booksInterface[],
-  total: number
+  product: IBooksInterface[];
+  total: number;
 }
 
 const initialState = {
   product: [],
-  total: 0
-}
+  total: 0,
+};
 
 export const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
-    addtoCart:(state, action:PayloadAction<booksInterface>)=>{
-      const existing = state.product.find(p=> p._id === action.payload._id);
-      console.log(existing)
-      if(existing){
+    addtoCart: (state:ICart, action: PayloadAction<IBooksInterface>) => {
+      const existing = state.product.find((p) => p._id === action.payload._id);
+      if (existing) {
         existing.Quantity++;
-      }else{
-        state.product.push({...action.payload, Quantity: 1})
-    }
-    state.total = state.total + JSON.parse(action.payload.Price as unknown as string)
+      } else {
+        state.product.push({ ...action.payload, Quantity: 1 });
+      }
+      state.total =
+        state.total + JSON.parse(action.payload.Price as unknown as string);
     },
-     removeFromCart:(state,action:PayloadAction<booksInterface>)=>{
-      const items = state.product.filter(p=> p._id !== action.payload._id);
+    removeOneFromCart: (state:ICart, action: PayloadAction<IBooksInterface>) => {
+      const existing = state.product.find((p) => p._id === action.payload._id);
+      if (existing!.Quantity > 1) {
+        existing!.Quantity--;
+          state.total = state.total - action.payload.Price;
+      } else {
+        const items = state.product.filter((p) => p._id !== action.payload._id);
+        state.total =
+          state.total - action.payload.Price * action.payload.Quantity!;
+        state.product = items;
+      }
+    },
+
+    removeFromCart: (state:ICart, action: PayloadAction<IBooksInterface>) => {
+      const items = state.product.filter((p) => p._id !== action.payload._id);
+      state.total =
+        state.total - action.payload.Price * action.payload.Quantity!;
       state.product = items;
-     }
+    },
   },
-})
+});
 
-export const { addtoCart, removeFromCart} = cartSlice.actions
+export const { addtoCart, removeFromCart, removeOneFromCart } =
+  cartSlice.actions;
 
-export default cartSlice.reducer
+export default cartSlice.reducer;
